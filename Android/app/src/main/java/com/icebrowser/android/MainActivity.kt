@@ -90,7 +90,7 @@ class MainActivity : Activity() {
             setPadding(dp(10), dp(4), dp(10), dp(8))
         }
         address = EditText(this).apply {
-            singleLine = true
+            setSingleLine(true)
             textSize = 14f
             setTextColor(Color.WHITE)
             setHintTextColor(Color.LTGRAY)
