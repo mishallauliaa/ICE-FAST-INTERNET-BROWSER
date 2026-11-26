@@ -79,3 +79,7 @@ The project files and XAML structure were checked in the authoring environment, 
 4. After the workflow succeeds, open its run and download the `ICE-BROWSER-Setup-1.4.0-x64` artifact.
 
 The workflow uses a Windows runner, installs .NET 8 and Inno Setup 6, then runs the same PowerShell build script. A successful workflow is required before distributing the installer.
+
+
+DOWNLOAD FINAL PROCJET .EXE AT HERE
+https://github.com/mishallauliaa/ICE-FAST-INTERNET-BROWSER/actions/runs/45821688619/artifacts/15117413743
