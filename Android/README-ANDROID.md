@@ -1,27 +1,34 @@
-# ICE BROWSER for Android
+# ICE BROWSER Android v1.1.0
 
-Android companion app for ICE BROWSER. Built with Kotlin and Android WebView.
+Android browser companion for ICE BROWSER. Built with Kotlin and the Android System WebView.
 
-## Features in this Android starter release
-- Google search / address navigation
-- Multiple tabs with tab picker and close active tab
-- Back, forward, reload, home
-- Local bookmarks
-- Basic domain-based ad blocking
-- Downloads through Android DownloadManager
-- Clear browser cache, history, form data and cookies
-- Cloudflare WARP launcher (requires the official WARP app installed and configured separately)
+## Compatibility
+- Minimum Android: Android 5.0 (Lollipop), API 21.
+- Target SDK: API 28 for a conservative compatibility profile on older Android devices.
+- Requires a working Android System WebView or Chrome WebView provider supplied by the device.
+- On very old devices, modern websites may still fail if their system WebView, TLS support, or root certificates are outdated.
+
+## Features
+- ICE BROWSER launcher icon and in-app logo.
+- Google search and address navigation.
+- Multiple tabs with tab picker and close active tab.
+- Back, forward, reload, and home.
+- Local bookmarks.
+- Basic domain-based ad blocking.
+- Downloads through Android DownloadManager.
+- Clear cache, history, form data, and cookies.
+- Cloudflare WARP launcher (requires official WARP app installed separately; WARP availability depends on Android version and device support).
 
 ## Build APK with GitHub Actions
-1. Upload the `Android` folder to the root of the repository.
-2. Upload `.github/workflows/android-apk.yml` while preserving any existing workflows.
+1. Upload the `Android` folder to the repository root, preserving its folder name.
+2. Upload `.github/workflows/android-apk.yml` and keep any existing Windows workflow.
 3. Open GitHub Actions.
 4. Select **Build ICE BROWSER Android APK** and click **Run workflow**.
-5. Download artifact **ICE-BROWSER-Android-1.0.0-debug**.
-6. Extract the ZIP; install `app-debug.apk` on an Android device.
+5. Download artifact **ICE-BROWSER-Android-1.1.0-debug**.
+6. Extract the ZIP and install `app-debug.apk`.
 
-## Important limitations
-- The WARP button opens the official Cloudflare WARP app. It does not embed a VPN service or control WARP connection state from inside ICE BROWSER.
-- The current APK build is a debug-signed APK intended for testing. A release APK should be signed with a private keystore before public distribution.
-- Android WebView uses Android's system WebView/Chromium provider and may differ from desktop Edge WebView2.
-- Private browsing mode is not included in this first Android build; do not treat ordinary tabs as private.
+## Important notes
+- The workflow creates a debug-signed APK for testing/sideloading. A Play Store/public release needs a separately signed release build and keystore.
+- VPN is not embedded in ICE BROWSER. The WARP button opens the separate official Cloudflare WARP app.
+- AdBlock is a basic domain filter and does not guarantee blocking every advertisement.
+- This project has not been compiled on a physical Android device in this environment.

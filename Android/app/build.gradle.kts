@@ -9,10 +9,10 @@ android {
 
     defaultConfig {
         applicationId = "com.icebrowser.android"
-        minSdk = 23
-        targetSdk = 35
-        versionCode = 100
-        versionName = "1.0.0"
+        minSdk = 21
+        targetSdk = 28
+        versionCode = 110
+        versionName = "1.1.0"
     }
 
     buildTypes {

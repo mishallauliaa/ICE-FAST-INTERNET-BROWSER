@@ -24,6 +24,7 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import java.net.URL
@@ -66,12 +67,24 @@ class MainActivity : Activity() {
             gravity = Gravity.CENTER_VERTICAL
             setPadding(dp(12), dp(10), dp(12), dp(8))
         }
-        val brand = TextView(this).apply {
-            text = "❄  ICE BROWSER"
+        val brand = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+        }
+        val logo = ImageView(this).apply {
+            setImageResource(R.mipmap.ic_launcher)
+            scaleType = ImageView.ScaleType.FIT_CENTER
+            contentDescription = "Logo ICE BROWSER"
+        }
+        brand.addView(logo, LinearLayout.LayoutParams(dp(36), dp(36)))
+        val brandText = TextView(this).apply {
+            text = "ICE BROWSER"
             textSize = 18f
             setTextColor(Color.WHITE)
             typeface = android.graphics.Typeface.DEFAULT_BOLD
+            setPadding(dp(9), 0, 0, 0)
         }
+        brand.addView(brandText)
         header.addView(brand, LinearLayout.LayoutParams(0, dp(42), 1f))
         tabCount = TextView(this).apply {
             text = "1 tab"
@@ -150,7 +163,7 @@ class MainActivity : Activity() {
             cornerRadius = dp(10).toFloat()
         }
         setPadding(dp(8), 0, dp(8), 0)
-        minWidth = dp(42)
+        minWidth = dp(38)
         minHeight = dp(40)
         setOnClickListener { action() }
     }
