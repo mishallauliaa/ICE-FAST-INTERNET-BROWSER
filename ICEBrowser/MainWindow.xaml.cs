@@ -8,7 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace ICEBrowser;
 
@@ -34,8 +33,8 @@ public partial class MainWindow : Window
     };
     private bool _adBlockEnabled = true;
     private readonly Dictionary<WebView2, Stopwatch> _navigationTimers = new();
-    private readonly string _settingsFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "settings.json");
-    private readonly string _filterFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "adblock-hosts.txt");
+    private readonly string _settingsFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "settings.json");
+    private readonly string _filterFile = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "adblock-hosts.txt");
     private BrowserSettings _settings = new();
     private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromSeconds(20) };
 
@@ -47,7 +46,7 @@ public partial class MainWindow : Window
         public List<string> LastTabs { get; set; } = new();
     }
     private BrowserTab? _active;
-    private readonly string _profileRoot = Path.Combine(
+    private readonly string _profileRoot = System.IO.Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "Profiles");
     private const string HomeUrl = "https://www.google.com";
     private bool _vpnBusy;
@@ -94,8 +93,8 @@ public partial class MainWindow : Window
     {
         var view = new WebView2();
         var profile = isPrivate
-            ? Path.Combine(Path.GetTempPath(), "ICEBrowser-InPrivate-" + Guid.NewGuid().ToString("N"))
-            : Path.Combine(_profileRoot, "Default");
+            ? System.IO.Path.Combine(System.IO.Path.GetTempPath(), "ICEBrowser-InPrivate-" + Guid.NewGuid().ToString("N"))
+            : System.IO.Path.Combine(_profileRoot, "Default");
         Directory.CreateDirectory(profile);
         BrowserHost.Children.Add(view);
         view.Visibility = Visibility.Collapsed;
@@ -126,12 +125,12 @@ public partial class MainWindow : Window
         };
         view.CoreWebView2.DownloadStarting += (_, args) =>
         {
-            var downloadDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
+            var downloadDir = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
             Directory.CreateDirectory(downloadDir);
-            var suggested = Path.GetFileName(args.ResultFilePath);
+            var suggested = System.IO.Path.GetFileName(args.ResultFilePath);
             if (string.IsNullOrWhiteSpace(suggested)) suggested = "download";
-            args.ResultFilePath = Path.Combine(downloadDir, suggested);
-            var entry = Path.GetFileName(args.ResultFilePath);
+            args.ResultFilePath = System.IO.Path.Combine(downloadDir, suggested);
+            var entry = System.IO.Path.GetFileName(args.ResultFilePath);
             _downloadLog.Add($"{DateTime.Now:HH:mm:ss}  {entry}  (started)");
             args.Handled = false;
             args.DownloadOperation.StateChanged += (_, _) =>
@@ -280,8 +279,8 @@ public partial class MainWindow : Window
     private void Bookmark_Click(object sender, RoutedEventArgs e)
     {
         if (_active?.View.Source == null) return;
-        var file = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "bookmarks.txt");
-        Directory.CreateDirectory(Path.GetDirectoryName(file)!);
+        var file = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ICEBrowser", "bookmarks.txt");
+        Directory.CreateDirectory(System.IO.Path.GetDirectoryName(file)!);
         File.AppendAllText(file, _active.View.Source + Environment.NewLine);
         StatusText.Text = "Bookmark saved";
     }
@@ -300,7 +299,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(_settingsFile)!);
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(_settingsFile)!);
             File.WriteAllText(_settingsFile, JsonSerializer.Serialize(_settings, new JsonSerializerOptions { WriteIndented = true }));
         }
         catch (Exception ex) { StatusText.Text = "Settings save failed: " + ex.Message; }
@@ -341,7 +340,7 @@ public partial class MainWindow : Window
                 if (host.Contains('.') && host.Length < 254 && !host.Contains('@')) domains.Add(host);
             }
             if (domains.Count < 100) throw new InvalidDataException("Filter response did not contain enough valid domains.");
-            Directory.CreateDirectory(Path.GetDirectoryName(_filterFile)!);
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(_filterFile)!);
             File.WriteAllLines(_filterFile, domains.OrderBy(x => x));
             _blockedHosts.Clear();
             foreach (var d in domains) _blockedHosts.Add(d);
@@ -448,14 +447,14 @@ public partial class MainWindow : Window
     {
         var candidates = new[]
         {
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Cloudflare", "Cloudflare WARP", "warp-cli.exe"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Cloudflare", "WARP", "warp-cli.exe")
+            System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Cloudflare", "Cloudflare WARP", "warp-cli.exe"),
+            System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Cloudflare", "WARP", "warp-cli.exe")
         };
         foreach (var path in candidates) if (File.Exists(path)) return path;
         var pathEnv = Environment.GetEnvironmentVariable("PATH") ?? "";
-        foreach (var dir in pathEnv.Split(Path.PathSeparator))
+        foreach (var dir in pathEnv.Split(System.IO.Path.PathSeparator))
         {
-            var candidate = Path.Combine(dir, "warp-cli.exe");
+            var candidate = System.IO.Path.Combine(dir, "warp-cli.exe");
             if (File.Exists(candidate)) return candidate;
         }
         return null;
