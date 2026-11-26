@@ -1,0 +1,12 @@
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser.csproj.AssemblyReference.cache
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\MainWindow.baml
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\App.baml
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\MainWindow.g.cs
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\App.g.cs
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser_Content.g.cs
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser_MarkupCompile.cache
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser.g.resources
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser.GeneratedMSBuildEditorConfig.editorconfig
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser.AssemblyInfoInputs.cache
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser.AssemblyInfo.cs
+D:\ICE-BROWSER-Release-Candidate-v1.4.0\ICEBrowser\obj\Release\net8.0-windows\win-x64\ICEBrowser.csproj.CoreCompileInputs.cache
